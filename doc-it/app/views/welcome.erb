@@ -1,6 +1,15 @@
 
 
 <div class="content">
-      <p>Welcome</p>
-      <a href="/login">Login</a> or <a href="/signup">Signup</a>
+      <h1>Welcome to Doc'It</h1>
+
+    <form action="/login" method="post">
+    <h4>Login:</h4>
+    <label for="username">Username:</label>
+    <input id="username" type="text" name="username" value="">
+    <label for="password">Password:</label>
+    <input id="password" type="password" name="password" value="">
+    <input type="submit" value="Login">
+    </form>
+      <h4> Don't have an account? Click <a href="/users/new">here</a> to Register </h4>
     </div>

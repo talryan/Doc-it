@@ -6,5 +6,6 @@ end
 
 use Rack::MethodOverride 
 
+use AppointmentController
 use UserController
 run ApplicationController
