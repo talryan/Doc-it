@@ -6,7 +6,7 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    register Sinatra::Flash
+    # register Sinatra::Flash
     set :session_secret, 'secretsecretigotasecret'
   end
 
@@ -23,6 +23,7 @@ class ApplicationController < Sinatra::Base
       @current_user ||=  User.find(session[:user_id]) if session[:user_id]
    end
    end
+
 
 private 
 def redirect_if_not_logged_in
