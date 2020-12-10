@@ -2,28 +2,30 @@ class AppointmentController < ApplicationController
     
     get '/appointments' do  #This displays index of appointments
         @appointments = Appointment.all
-        erb :'/appointments/index' 
+        erb :"/appointments/index"
     end
+
     post '/appointments' do 
         # redirect_if_not_logged_in
-        appointments = current_user.appointments.build(params)
-        appointment.save 
-        redirect '/appointments'
+        @appointment = Appointment.create(params)
+        @appointment.user_id = session[:user_id]
+        @appointment.save
+        redirect "/appointments/index"
     end
 
     get '/appointments/new' do 
-        erb :"appointments/new"
+        erb :'appointments/new'
     end
 
     get '/appointments/:id' do
         # redirect_if_not_logged_in
-        @appointment = Appointment.find(params["id"])
+        @appointment = Appointment.find(params[:id])
         erb :"appointments/show"
     end
 
 
     get '/appointments/:id/edit' do
-        @appointment = Appointment.find(params["id"])
+        @appointment = Appointment.find(params[:id])
         # redirect_if_not_authorized
         erb :"appointments/edit"
     end
