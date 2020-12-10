@@ -1,8 +1,12 @@
 class AppointmentController < ApplicationController
     
     get '/appointments' do  #This displays index of appointments
+        if logged_in?
         @appointments = Appointment.all
         erb :"/appointments/index"
+        else 
+        redirect "/"
+        end
     end
 
     # post '/appointments' do 
@@ -24,7 +28,7 @@ class AppointmentController < ApplicationController
     end
     post '/appointments' do 
         # redirect_if_not_logged_in
-        @appointment = Appointment.create(params)
+        @appointment = Appointment.create(date: params[:date], time: params[:time], patient_name: params[:patient_name])
         @appointment.user_id = session[:user_id]
         @appointment.save
         redirect "/appointments"

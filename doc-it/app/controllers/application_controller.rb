@@ -6,7 +6,7 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    # register Sinatra::Flash
+    register Sinatra::Flash
     set :session_secret, 'secretsecretigotasecret'
   end
 
@@ -29,12 +29,10 @@ class ApplicationController < Sinatra::Base
     end
   end
   private
-  def redirect_if_not_authorized
-    redirect '/welcome' if @appointment.user != current_user
-  end
 
   def redirect_if_logged_in
-    if logged_in?
+    if !logged_in?
+      flash[:message] = "Wrong username or password. Please try again."
       redirect "/login"
     end
   end
