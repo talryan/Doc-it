@@ -1,0 +1,12 @@
+
+<h4>Alter Existing Appointment on <%=@appointment.date%></h4>
+
+<form method="POST" action="/appointments/<%= @appointment.id %>">
+
+    <input type="hidden" name="_method" value="PUT">
+    New Date:<input name="date" type="date"> <br>
+    Time: <input name ="time" type ="time"> <br>
+    Patient Name:<input name="patient_name" type="text"> <br>
+
+    <input type="submit" value="Update Appointment">
+</form>

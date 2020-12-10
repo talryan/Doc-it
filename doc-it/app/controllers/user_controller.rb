@@ -3,14 +3,15 @@ class UserController < ApplicationController
         erb :"users/new"
     end
     get '/login' do 
+        redirect_if_not_logged_in
         erb :"/users/login"
     end
     get '/users/:id' do
         @user = User.find_by_id(params[:id])
-        if @user != current_user
-        else
+        # if @user != current_user
+        # ### insert error here
+        # else
           erb :"/users/show"
-        end
     end
 
     post '/login' do 
@@ -30,13 +31,10 @@ class UserController < ApplicationController
         else
             user.save 
             session[:user_id] = user.id
+            redirect "/users/#{user.id}"
         end
         
     end
-
-    # get '/login' do 
-    #     erb :"/users/login"
-    # end
 
     post '/login' do 
         @user = User.find_by(username: params[:username])
