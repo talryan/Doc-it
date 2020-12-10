@@ -5,13 +5,13 @@ class AppointmentController < ApplicationController
         erb :"/appointments/index"
     end
 
-    post '/appointments' do 
-        # redirect_if_not_logged_in
-        @appointment = Appointment.create(params)
-        @appointment.user_id = session[:user_id]
-        @appointment.save
-        redirect "/appointments/index"
-    end
+    # post '/appointments' do 
+    #     # redirect_if_not_logged_in
+    #     @appointment = Appointment.create(params)
+    #     @appointment.user_id = session[:user_id]
+    #     @appointment.save
+    #     redirect "/appointments/index"
+    # end
 
     get '/appointments/new' do 
         erb :'appointments/new'
@@ -20,15 +20,21 @@ class AppointmentController < ApplicationController
     get '/appointments/:id' do
         # redirect_if_not_logged_in
         @appointment = Appointment.find(params[:id])
-        erb :"appointments/show"
+        erb :'appointments/show'
+    end
+    post '/appointments' do 
+        # redirect_if_not_logged_in
+        @appointment = Appointment.create(params)
+        @appointment.user_id = session[:user_id]
+        @appointment.save
+        redirect "/appointments"
     end
 
-
-    get '/appointments/:id/edit' do
-        @appointment = Appointment.find(params[:id])
-        # redirect_if_not_authorized
-        erb :"appointments/edit"
-    end
+    # get '/appointments/:id/edit' do
+    #     @appointment = Appointment.find(params[:id])
+    #     # redirect_if_not_authorized
+    #     erb :"appointments/edit"
+    # end
 
 
     patch '/appointments/:id' do
@@ -36,6 +42,11 @@ class AppointmentController < ApplicationController
         # redirect_if_not_authorized
         @appointment.update(params["appointment"])
         redirect "/appointments/#{@appointment.id}"
+    end
+    get '/appointments/:id/edit' do
+        @appointment = Appointment.find(params[:id])
+        # redirect_if_not_authorized
+        erb :"appointments/edit"
     end
 
     delete '/appointments/:id' do 
