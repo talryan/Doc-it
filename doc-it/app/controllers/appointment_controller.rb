@@ -1,7 +1,7 @@
 class AppointmentController < ApplicationController
     get '/appointments' do 
         @appointments = Appointment.all
-        erb :"appintments/show" 
+        erb :"appointments/show" 
     end
     post '/appointments' do 
         redirect_if_not_logged_in
@@ -11,9 +11,6 @@ class AppointmentController < ApplicationController
     end
 
     get '/appointments/new' do 
-        if !logged_in? 
-            redirect '/login'
-        end
         erb :"appointments/new"
     end
 
@@ -23,12 +20,6 @@ class AppointmentController < ApplicationController
         erb :"appointments/show"
     end
 
-    # post '/appointments' do 
-    #     redirect_if_not_logged_in
-    #     appointments = current_user.appointments.build(params)
-    #     appointment.save 
-    #     redirect '/appointments'
-    # end
 
     get '/appointments/:id/edit' do
         @appointment = Appointment.find(params["id"])
