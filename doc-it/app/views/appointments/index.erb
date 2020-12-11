@@ -1,8 +1,10 @@
 <h1> test test </h1>
 
-
+<% @appointments.each do |appointment| %>
+<a href="/appointments/<%=appointment.id%>"><%=appointment.patient_name %></a><br>
+<% end %>
 <!--link to appointments-->
-<a href="/show">Appointment Calendar</a>
+
 <!--link to create appointments-->
 <a href="/appointments/new">Create New Appointment</a>
 

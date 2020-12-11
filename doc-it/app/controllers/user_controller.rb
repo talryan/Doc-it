@@ -2,21 +2,23 @@ class UserController < ApplicationController
     get '/users' do 
         erb :'/users/index'
     end
+
     get '/signup' do
         erb :"users/new"
     end
+
     post "/signup" do  
         user = User.new(username: params[:username], password: params[:password], first_name: params["first name"], last_name: params["last name"])
         # user = User.new(params)
         # if params.values.any?{|value| value.blank?} || User.find_by_username(params[:username])
         if user.username.blank? || user.password.blank? || user.first_name.blank? || user.last_name.blank? || User.find_by_username(params["username"])
-           redirect "/users/#{user.id}"
+           redirect "/signup"
   
         else
             user.save 
             flash[:message] = "Success! Please login now."
             session[:user_id] = user.id
-            redirect '/users'
+            
             redirect "/users/#{user.id}"
         end
         
@@ -25,13 +27,6 @@ class UserController < ApplicationController
         # redirect_if_not_logged_in
         erb :"/users/login"
     end
-    # get '/users/:id' do
-    #     @user = User.find_by_id(params[:id])
-    #     # if @user != current_user
-    #     # ### insert error here
-    #     # else
-    #       erb :"/apppointments/show"
-    # end
 
     post '/login' do 
         @user = User.find_by(username: params[:username])
@@ -45,17 +40,11 @@ class UserController < ApplicationController
         end
     end
 
-    # post "/users/new" do  
-    #     user = User.new(username: params[:username], password: params[:password], first_name: params["first name"], last_name: params["last name"])
-    #     if user.username.blank? || user.password.blank? || user.first_name.blank? || user.last_name.blank? || User.find_by_username(params["username"])
-    #        redirect "/users/#{user.id}"
-    #     else
-    #         user.save 
-    #         session[:user_id] = user.id
-    #         redirect "/users/#{user.id}"
-    #     end
-        
-    # end
+
+    get "/users/:id" do
+        @users = User.find(params["id"]) 
+        erb :"/appointments"
+    end
 
     post '/login' do 
         @user = User.find_by(username: params[:username])

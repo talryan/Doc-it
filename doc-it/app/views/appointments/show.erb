@@ -1,8 +1,17 @@
-<h1> Appointment Portal </h1>
+<h1> Appointment Details</h1>
+
+
+<p> Patient Name: <%=@appointment.patient_name%>
+<p>Date: <%=@appointment.date.strftime("%A, %B %e, %Y")%></p>
+<p>Time: <%=@appointment.time.strftime("%I:%M%p")%></p>
+
+
 
 
 <!--link to appointments-->
 <a href="/appointments">Appointment Calendar</a>
 <!--link to create appointments-->
 <a href="/appointments/new">Create New Appointment</a>
+<!-- link to edit-->
+<a href="/appointments/<%= @appointment.id %>">Edit Appointment Details<a/>
 
