@@ -25,26 +25,19 @@ class AppointmentController < ApplicationController
         @appointment.save
         redirect "/appointments"
     end
-
-    # get '/appointments/:id/edit' do
-    #     @appointment = Appointment.find(params[:id])
-    #     # redirect_if_not_authorized
-    #     erb :"appointments/edit"
-    # end
-
-
-    patch '/appointments/:id' do
-        @appointment = Appointment.find(params["id"]) 
-        # redirect_if_not_authorized
-        @appointment.update(date:params["date"], time: params["time"])
-        redirect "/appointments/#{@appointment.id}"
-    end
-    
     get '/appointments/:id/edit' do
-        @appointment = Appointment.find(params[:id])
+        @appointment = Appointment.find_by_id(params[:id])
         # redirect_if_not_authorized
         erb :"appointments/edit"
     end
+
+    patch '/appointments/:id' do
+        @appointment = Appointment.find_by_id(params[:id]) 
+        # redirect_if_not_authorized
+        @appointment.update(date:params["date"], time:params["time"])
+        redirect "/appointments/#{@appointment.id}"
+    end
+
 
     delete '/appointments/:id' do 
         @appointment = Appointment.find(params["id"])

@@ -1,4 +1,4 @@
-<h1> test test </h1>
+<h1><%=current_user.username %>'s Appointments</h1>
 
 <% @appointments.each do |appointment| %>
 <a href="/appointments/<%=appointment.id%>"><%=appointment.patient_name %></a><br>
@@ -7,4 +7,5 @@
 
 <!--link to create appointments-->
 <a href="/appointments/new">Create New Appointment</a>
+<a href="/appointments/
 

@@ -13,5 +13,7 @@
 <!--link to create appointments-->
 <a href="/appointments/new">Create New Appointment</a>
 <!-- link to edit-->
-<a href="/appointments/<%= @appointment.id %>">Edit Appointment Details<a/>
+<a href="<%=@appointment.id%>/edit">Edit Appointment Details<a/>
+<!-- link to cancel -->
+<a href="/appointments/delete">Cancel an Appointment</a>
 
