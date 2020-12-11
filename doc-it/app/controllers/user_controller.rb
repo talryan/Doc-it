@@ -8,9 +8,8 @@ class UserController < ApplicationController
     end
 
     post "/signup" do  
-        user = User.new(username: params[:username], password: params[:password], first_name: params["first name"], last_name: params["last name"])
-        # user = User.new(params)
-        # if params.values.any?{|value| value.blank?} || User.find_by_username(params[:username])
+        user = User.new(params)
+        #user = User.new(username: params[:username], password: params[:password], first_name: params[:first_name], last_name: params[:last_name])
         if user.username.blank? || user.password.blank? || user.first_name.blank? || user.last_name.blank? || User.find_by_username(params["username"])
            redirect "/signup"
   
@@ -40,18 +39,18 @@ class UserController < ApplicationController
         end
     end
 
-
-    get "/users/:id" do
-        @users = User.find(params["id"]) 
-        erb :"/appointments"
-    end
-
     post '/login' do 
         @user = User.find_by(username: params[:username])
         if @user && @user.authenticate(params[:password])
          session[:user_id] = @user.id
          redirect "/appointments"
         end
+    end
+
+    get "/users/:id" do
+        @users = User.find(params["id"]) 
+        @appointments =Appointment.all
+        erb :"/appointments/index"
     end
 
     get '/logout' do
