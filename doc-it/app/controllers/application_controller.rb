@@ -35,5 +35,12 @@ class ApplicationController < Sinatra::Base
       redirect "/login"
     end
   end
+  private
+
+  def unauthorized
+    if @appointment.user != current_user
+      redirect "/appointments"
+    end
+  end
   
 end

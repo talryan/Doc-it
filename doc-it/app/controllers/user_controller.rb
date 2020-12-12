@@ -17,7 +17,6 @@ class UserController < ApplicationController
             user.save 
             flash[:message] = "Success! Please login now."
             session[:user_id] = user.id
-            
             redirect "/users/#{user.id}"
         end
         

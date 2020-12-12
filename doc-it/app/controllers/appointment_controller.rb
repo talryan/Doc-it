@@ -22,8 +22,8 @@ class AppointmentController < ApplicationController
 
     post '/appointments' do 
         redirect_if_not_logged_in
-        appointment = Appointment.create(date: params[:date], time: params[:time], patient_name: params[:patient_name], doctor: params[:name])
-        if appointment.date.blank?|| appointment.time.blank?|| appointment.patient_name.blank?
+        appointment = Appointment.create(date: params[:date], time: params[:time], patient_name: params[:patient_name], doctor_name: params[:doctor_name])
+        if appointment.date.blank?|| appointment.time.blank?|| appointment.patient_name.blank?|| appointment.doctor_name.blank?
             redirect"appointments/new"
         end
         appointment.user_id = session[:user_id]
@@ -54,11 +54,5 @@ class AppointmentController < ApplicationController
         redirect "/appointments"
     end
 
-    private
-
-    def unauthorized
-      if @appointment.user != current_user
-        redirect "/appointments"
-      end
-    end
+ 
 end
