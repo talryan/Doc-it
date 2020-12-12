@@ -22,7 +22,7 @@ class AppointmentController < ApplicationController
 
     post '/appointments' do 
         redirect_if_not_logged_in
-        appointment = Appointment.create(date: params[:date], time: params[:time], patient_name: params[:patient_name])
+        appointment = Appointment.create(date: params[:date], time: params[:time], patient_name: params[:patient_name], doctor: params[:name])
         if appointment.date.blank?|| appointment.time.blank?|| appointment.patient_name.blank?
             redirect"appointments/new"
         end
