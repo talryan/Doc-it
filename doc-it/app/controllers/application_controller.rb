@@ -28,12 +28,12 @@ class ApplicationController < Sinatra::Base
       @current_user ||=  User.find(session[:user_id]) if session[:user_id]
     end
   end
-  private
 
-  def redirect_if_logged_in
+  def redirect_if_not_logged_in
     if !logged_in?
       flash[:message] = "Wrong username or password. Please try again."
       redirect "/login"
     end
   end
+  
 end

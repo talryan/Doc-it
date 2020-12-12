@@ -5,8 +5,8 @@
 <form method="POST" action="/appointments/<%= @appointment.id %>">
 
     <input type="hidden" name="_method" value="PUT">
-    New Date:<input name="date" type="date"> <br>
-    Time: <input name ="time" type ="time"> <br>
+    <p><label>New Date:</label> <input type="date" name="appointments[date]" value="<%=@appointment.date%>"></p>
+    <p><label>Time:</label> <input type="time" name="appointments[time]" value="<%=@appointment.time%>"></p>
    
-    <input type="submit" value="Update ">
+    <input type="submit" value="Update">
 </form>

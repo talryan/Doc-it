@@ -23,7 +23,6 @@ class UserController < ApplicationController
         
     end
     get '/login' do 
-        # redirect_if_not_logged_in
         erb :"/users/login"
     end
 
@@ -35,6 +34,7 @@ class UserController < ApplicationController
             redirect '/users'
             # redirect "/users/#{@user.id}"
         else
+            redirect_if_not_logged_in
             redirect "/login"
         end
     end
@@ -43,13 +43,13 @@ class UserController < ApplicationController
         @user = User.find_by(username: params[:username])
         if @user && @user.authenticate(params[:password])
          session[:user_id] = @user.id
-         redirect "/appointments"
+         redirect "/user/index"
         end
     end
 
     get "/users/:id" do
-        @users = User.find(params["id"]) 
-        @appointments =Appointment.all
+        redirect_if_not_logged_in
+        @user = User.find(params["id"]) 
         erb :"/appointments/index"
     end
 

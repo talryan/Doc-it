@@ -1,4 +1,8 @@
+<% if flash(:message) %>
+  <%=flash[:message]%>
+<% end %> 
 <h2> Welcome Back! 
+
 <form action="/login" method="post">
     <label for="username">Username:</label>
     <input id="username" type="text" name="username" value="">

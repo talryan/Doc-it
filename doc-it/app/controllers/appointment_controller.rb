@@ -2,7 +2,7 @@ class AppointmentController < ApplicationController
     
     get '/appointments' do  #This displays index of appointments
         if logged_in?
-        @appointments = Appointment.all
+        @user = current_user 
         erb :"/appointments/index"
         else 
         redirect "/"
@@ -10,34 +10,36 @@ class AppointmentController < ApplicationController
     end
 
     get '/appointments/new' do 
+        redirect_if_not_logged_in
         erb :'appointments/new'
     end
 
     get "/appointments/:id" do
+        redirect_if_not_logged_in
         @appointment = Appointment.find(params["id"]) 
-       
         erb :"appointments/show"
     end
 
     post '/appointments' do 
-        # redirect_if_not_logged_in
-        @appointment = Appointment.create(date: params[:date], time: params[:time], patient_name: params[:patient_name])
-        @appointment.user_id = session[:user_id]
-        @appointment.save
-        redirect "/appointments"
+        redirect_if_not_logged_in
+        appointment = Appointment.create(date: params[:date], time: params[:time], patient_name: params[:patient_name])
+        if appointment.date.blank?|| appointment.time.blank?|| appointment.patient_name.blank?
+            redirect"appointments/new"
+        end
+        appointment.user_id = session[:user_id]
+        appointment.save
+        redirect "/appointments/#{appointment.id}"
     end
+
     get '/appointments/:id/edit' do
-      
         @appointment = Appointment.find(params[:id])
-        # redirect_if_not_authorized
+        unauthorized
         erb :"appointments/edit"
     end
 
-    patch '/appointments/:id' do
-        binding.pry
-        @appointment = Appointment.find_by_id(params[:id]) 
-       
-        # redirect_if_not_authorized
+    put '/appointments/:id' do
+        @appointment = Appointment.find(params[:id]) 
+        unauthorized
         @appointment.update(params["appointments"])
         
         redirect "/appointments/#{@appointment.id}"
@@ -45,9 +47,18 @@ class AppointmentController < ApplicationController
 
 
     delete '/appointments/:id' do 
-        @appointment = Appointment.find_by_id(params["id"])
-        # redirect_if_not_authorized
+
+        @appointment = Appointment.find(params[:id])
+        unauthorized
         @appointment.destroy
-        redirect '/appointments'
+        redirect "/appointments"
+    end
+
+    private
+
+    def unauthorized
+      if @appointment.user != current_user
+        redirect "/appointments"
+      end
     end
 end

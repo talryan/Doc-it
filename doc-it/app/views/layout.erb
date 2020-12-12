@@ -23,6 +23,10 @@
       <footer class="branding">
         <small>&copy; 2020 <strong>Doc-It</strong></small>
       </footer>
+       <% if logged_in? %>
+          <a href="/logout">Log Out</a>
+          <%end%>
+      
     </div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>

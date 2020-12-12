@@ -15,5 +15,8 @@
 <!-- link to edit-->
 <a href="<%=@appointment.id%>/edit">Edit Appointment Details<a/>
 <!-- link to cancel -->
-<a href="/appointments/delete">Cancel an Appointment</a>
+<form method="POST" action="<%=@appointment.id%>">
+  <input type="hidden" name="_method" value ="DELETE">
+  <h5> <input type="submit" value="Cancel Appointment"> </h5>
+</form>
 
