@@ -9,4 +9,3 @@ use Rack::MethodOverride
 use AppointmentController
 use UserController
 run ApplicationController
-use DoctorsController
