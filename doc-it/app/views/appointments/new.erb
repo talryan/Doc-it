@@ -3,13 +3,13 @@
 
     Date:<input name="date" type="date"> <br>
     Time: <input name ="time" type ="time"> <br>
-    Patient Name:<input name="patient_name" type="text"> <br>
+    Patient Name:<%=current_user.first_name.capitalize%> <br>
     <h4> Select Doctor: </h4>
-    <input type="radio" name="doctor"> Dr. Hummel <br> 
-    <input type="radio" name="doctor"> Dr. Lerma <br>
-    <input type="radio" name="doctor"> Dr. Weenum <br>
-    <input type="radio" name="doctor"> Dr. Bontempo <br>
-    <input type="radio" name="doctor"> Dr. Ryan <br>
+    <input type="radio" name="doctor_name" value="Dr. Hummel"> Dr. Hummel<br> 
+    <input type="radio" name="doctor_name" value="Dr. Lerma"> Dr. Lerma<br>
+    <input type="radio" name="doctor_name" value="Dr. Weenum"> Dr. Weenum<br>
+    <input type="radio" name="doctor_name" value="Dr. Bontempo"> Dr. Bontempo<br>
+    <input type="radio" name="doctor_name" value="Dr. Ryan">Dr. Ryan<br>
     <input type="submit" value="Create Appointment">
 </form>
 

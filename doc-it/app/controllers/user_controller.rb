@@ -9,15 +9,18 @@ class UserController < ApplicationController
 
     post "/signup" do  
         user = User.new(params)
-        #user = User.new(username: params[:username], password: params[:password], first_name: params[:first_name], last_name: params[:last_name])
         if user.username.blank? || user.password.blank? || user.first_name.blank? || user.last_name.blank? || User.find_by_username(params["username"])
-           redirect "/signup"
-  
+            flash[:message] = 'Try Again.'
+            redirect "/signup"
+        elsif
+         User.find_by_username(params['username'])
+
+        redirect '/'
         else
             user.save 
-            flash[:message] = "Success! Please login now."
             session[:user_id] = user.id
             redirect "/users/#{user.id}"
+            
         end
         
     end
@@ -33,6 +36,7 @@ class UserController < ApplicationController
             redirect '/users'
             # redirect "/users/#{@user.id}"
         else
+            flash[:message] = "Entry Invalid. Try Again."
             redirect_if_not_logged_in
             redirect "/login"
         end

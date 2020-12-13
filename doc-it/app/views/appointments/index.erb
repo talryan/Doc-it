@@ -1,11 +1,10 @@
-<h1>Appointment Schedule</h1>
-
-<!--<% @user.appointments.each do |user_appointment| %>
-<a href="/appointments/<%=user_appointment.id%>"><%=user_appointment.patient_name %></a><br>
+<h1>Appointment Portal</h1>
+<h3> Upcoming Appointments: </h3>
+<% @user.appointments.each do |user_appointment| %>
+<a href="/appointments/<%=user_appointment.id%>"><%=user_appointment.date.strftime("%B %e, %Y") %> - <%=user_appointment.doctor_name %></a><br>
 <% end %>
 <!--link to appointments-->
-<h2> Natty </h2>
-<h2> Desi </h2>
+
 
 <!--link to create appointments-->
 <a href="/appointments/new">Create New Appointment</a>

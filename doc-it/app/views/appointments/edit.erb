@@ -1,13 +1,17 @@
 
 <h2>Alter Existing Appointment on <%=@appointment.date.strftime("%A, %B %e, %Y")%> </h2>
-<h4>Patient Name: <%=@appointment.patient_name%></h4>
+<h4>Patient Name: <%=current_user.first_name.capitalize%></h4>
 
 <form method="POST" action="/appointments/<%= @appointment.id %>">
 
     <input type="hidden" name="_method" value="PUT">
     <p><label>New Date:</label> <input type="date" name="appointments[date]" value="<%=@appointment.date%>"></p>
     <p><label>Time:</label> <input type="time" name="appointments[time]" value="<%=@appointment.time%>"></p>
+    <p><input type="radio" name="appointments[doctor_name]" value="Dr. Hummel"> Dr. Hummel<br> </p>
+    <p><input type="radio" name="appointments[doctor_name]" value="Dr. Lerma"> Dr. Lerma<br></p>
+    <p><input type="radio" name="appointments[doctor_name]" value="Dr. Weenum"> Dr. Weenum<br></p>
+    <p><input type="radio" name="appointments[doctor_name]" value="Dr. Bontempo"> Dr. Bontempo<br></p>
+    <p><input type="radio" name="appointments[doctor_name]" value="Dr. Ryan">Dr. Ryan<br></p>
     
-   
     <input type="submit" value="Update">
 </form>

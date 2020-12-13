@@ -1,7 +1,7 @@
 <h1> Appointment Details</h1>
 
-
-<p> Patient Name: <%=@appointment.patient_name%>
+<p> Patient Name:<%=current_user.first_name.capitalize %></p>
+<p> Doctor Name: <%=@appointment.doctor_name%></p>
 <p>Date: <%=@appointment.date.strftime("%A, %B %e, %Y")%></p>
 <p>Time: <%=@appointment.time.strftime("%I:%M%p")%></p>
 

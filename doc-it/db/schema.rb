@@ -16,9 +16,7 @@ ActiveRecord::Schema.define(version: 2020_12_08_190738) do
     t.date "date"
     t.time "time"
     t.integer "user_id"
-    t.integer "doctor_id"
     t.string "doctor_name"
-    t.string "patient_name"
   end
 
   create_table "users", force: :cascade do |t|

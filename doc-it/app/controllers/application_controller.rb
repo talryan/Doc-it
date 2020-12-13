@@ -13,10 +13,6 @@ class ApplicationController < Sinatra::Base
   get "/" do
     erb :welcome
   end
-  ### Re-Enable once you are ready for error
-  # get 'error' do
-  #   erb :error
-  # end
 
   helpers do 
 
@@ -25,13 +21,13 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_user
-      @current_user ||=  User.find(session[:user_id]) if session[:user_id]
+      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
     end
   end
 
   def redirect_if_not_logged_in
     if !logged_in?
-      flash[:message] = "Wrong username or password. Please try again."
+      flash[:message] = "Login Failed. Try again."
       redirect "/login"
     end
   end
