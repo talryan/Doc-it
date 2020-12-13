@@ -1,4 +1,7 @@
-
+  
+<%if flash(:message)%>
+  <p style="color:red;"><%=flash[:message]%></p>
+<%end%> 
 
 <div class="content">
       <h1>Welcome to Doc'It</h1>

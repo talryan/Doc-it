@@ -16,7 +16,7 @@ class AppointmentController < ApplicationController
 
     get "/appointments/:id" do
         redirect_if_not_logged_in
-        @appointment = Appointment.find(params["id"]) 
+        @appointment = Appointment.find(params[:id]) 
         erb :"appointments/show"
     end
 
@@ -25,7 +25,6 @@ class AppointmentController < ApplicationController
         appointment = Appointment.create(date: params[:date], time: params[:time], doctor_name: params[:doctor_name])
         if appointment.date.blank?|| appointment.time.blank?|| appointment.doctor_name.blank?
             redirect"appointments/new"
-
         end
         appointment.user_id = session[:user_id]
         appointment.save
@@ -42,12 +41,10 @@ class AppointmentController < ApplicationController
         @appointment = Appointment.find(params[:id]) 
         unauthorized
         @appointment.update(params["appointments"])
-        
         redirect "/appointments/#{@appointment.id}"
     end
 
     delete '/appointments/:id' do 
-
         @appointment = Appointment.find(params[:id])
         unauthorized
         @appointment.destroy

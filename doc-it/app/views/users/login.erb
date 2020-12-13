@@ -1,6 +1,7 @@
-<% if flash(:message) %>
-  <%=flash[:message]%>
-<% end %> 
+  
+<%if flash(:message)%>
+  <p style="color:red;"><%=flash[:message]%></p>
+<%end%> 
 <h2> Welcome Back! 
 
 <form action="/login" method="post">

@@ -34,7 +34,6 @@ class UserController < ApplicationController
             session[:user_id] = @user.id
             flash[:message] = "Log in successful."
             redirect '/users'
-            # redirect "/users/#{@user.id}"
         else
             flash[:message] = "Entry Invalid. Try Again."
             redirect_if_not_logged_in
