@@ -1,12 +1,10 @@
+<br>
 <h1>Appointment Portal</h1>
 <h3> Upcoming Appointments: </h3>
 <% @user.appointments.each do |user_appointment| %>
 <a href="/appointments/<%=user_appointment.id%>"><%=user_appointment.date.strftime("%B %e, %Y") %> - <%=user_appointment.doctor_name %></a><br>
 <% end %>
-<!--link to appointments-->
 
-
-<!--link to create appointments-->
 <a href="/appointments/new">Create New Appointment</a>
 <a href
 
