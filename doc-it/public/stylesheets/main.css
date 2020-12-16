@@ -22,7 +22,7 @@
   }
 
   .wrapper {
-    background: rgb(238, 238, 237);
+    background: rgb(255, 255, 255);
     -moz-box-shadow: 0 0 10px rgba(0,0,0,.3);
     -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
     box-shadow: 0 0 10px rgba(0,0,0,.3);
@@ -38,7 +38,7 @@
   }
 
   h2 {
-    border-bottom: 2px solid #ccc;
+    border-bottom: 2px solid rgb(255, 255, 255);
     font-size: 24px;
     line-height: 36px;
     margin-bottom: 16px;
