@@ -23,7 +23,8 @@ class AppointmentController < ApplicationController
     post '/appointments' do 
         redirect_if_not_logged_in
         appointment = Appointment.create(date: params[:date], time: params[:time], doctor_name: params[:doctor_name])
-        if appointment.date.blank?|| appointment.time.blank?|| appointment.doctor_name.blank?
+        if appointment.date.blank? || appointment.time.blank? || appointment.doctor_name.blank?
+            flash[:message] = 'One or more fields left empty.Try Again.'
             redirect"appointments/new"
         end
         appointment.user_id = session[:user_id]
@@ -34,14 +35,23 @@ class AppointmentController < ApplicationController
     get '/appointments/:id/edit' do
         @appointment = Appointment.find(params[:id])
         unauthorized
+        #  if @appointment.date.blank?|| @appointment.time.blank?|| @appointment.doctor_name.blank?
+        # flash[:message] = 'Try Again.'
+
         erb :"appointments/edit"
+  
     end
+
 
     put '/appointments/:id' do
         @appointment = Appointment.find(params[:id]) 
         unauthorized
+        # if @appointment.date.blank?|| @appointment.time.blank?|| @appointment.doctor_name.blank?
+        #     flash[:message] = 'Try Again.'
+        # else
         @appointment.update(params["appointments"])
         redirect "/appointments/#{@appointment.id}"
+        # end
     end
 
     delete '/appointments/:id' do 
@@ -50,7 +60,7 @@ class AppointmentController < ApplicationController
         @appointment.destroy
         redirect "/appointments"
     end
-
+    
     private
 
     def unauthorized
@@ -58,4 +68,6 @@ class AppointmentController < ApplicationController
         redirect "/appointments"
       end
     end
+
+   
 end
