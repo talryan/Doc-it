@@ -46,12 +46,8 @@ class AppointmentController < ApplicationController
     put '/appointments/:id' do
         @appointment = Appointment.find(params[:id]) 
         unauthorized
-        # if @appointment.date.blank?|| @appointment.time.blank?|| @appointment.doctor_name.blank?
-        #     flash[:message] = 'Try Again.'
-        # else
         @appointment.update(params["appointments"])
         redirect "/appointments/#{@appointment.id}"
-        # end
     end
 
     delete '/appointments/:id' do 
